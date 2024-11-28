@@ -88,7 +88,10 @@ classdef BlackJackEnv < handle
         end
 
         function [observation, info] = reset(obj)
-            % Reset environment to initial state
+            %% RESET Reset environment to initial state and return observation.
+            % [observation, info] = RESET()
+            % Args:
+            %   None
             % Returns:
             %   observation: Initial state
             %   info: Additional information dictionary
@@ -106,7 +109,8 @@ classdef BlackJackEnv < handle
         end
         
         function [observation, reward, terminated, truncated, info] = step(obj, action)
-            % Execute one timestep within the environment
+            %% STEP Execute one timestep within the environment
+            % [observation, reward, terminated, truncated, info] = step(action)
             % Args:
             %   action: scalar {1, 2}, 1-stand, 2-hit
             % Returns:
@@ -114,7 +118,7 @@ classdef BlackJackEnv < handle
             %   reward: Reward value
             %   terminated: Whether episode ended naturally
             %   truncated: Whether episode was artificially terminated
-            %   info: Additional information
+            %   info: Additional information structure, step count for current episode.
             
             % Validate action
             assert(numel(action) == obj.action_size, 'Invalid action dimension');
@@ -154,7 +158,11 @@ classdef BlackJackEnv < handle
             truncated = obj.step_count >= obj.max_steps;
             
             % Additional info
-            info = struct('episode_step', obj.step_count);
+            if terminated
+                info = struct('episode_step', obj.step_count, 'dealer_hand', obj.score(obj.dealer));
+            else
+                info = struct('episode_step', obj.step_count);
+            end
         end
     end
 end
