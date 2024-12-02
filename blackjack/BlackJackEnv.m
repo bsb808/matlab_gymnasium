@@ -88,8 +88,9 @@ classdef BlackJackEnv < handle
         end
 
         function [observation, info] = reset(obj)
-            %% RESET Reset environment to initial state and return observation.
+            % RESET Reset environment to initial state and return observation.
             % [observation, info] = RESET()
+            % Equivalent to dealing a new hand.
             % Args:
             %   None
             % Returns:
@@ -108,8 +109,34 @@ classdef BlackJackEnv < handle
             info = struct('episode_step', obj.step_count);
         end
         
+        function [observation, info] = set(obj, observation)
+            % SET Set the environment to a specific state
+            % [observation, info] = SET(observation)
+            % Used for testing and debugging, to set the environment to a specific state.
+            % Args:
+            %   observation: State to set the environment to
+            % Returns:
+            %   observation: State after setting - should be same as input
+            %   info: Additional information dictionary
+            obj.step_count = 1;
+            obj.dealer = [observation(2), obj.draw_card()];
+            if observation(3)
+                obj.player = [1, observation(1) - 11];
+            else
+                observation(1) = observation(1);
+                if observation(1) > 11
+                    obj.player = [10, observation(1) - 10];
+                else
+                    first_card = floor(observation(1)/2);
+                    obj.player = [first_card, observation(1) - first_card];
+                end
+            end
+            observation = obj.get_obs();
+            info = struct('episode_step', obj.step_count);
+        end
+
         function [observation, reward, terminated, truncated, info] = step(obj, action)
-            %% STEP Execute one timestep within the environment
+            %% STEP Execute one timestep within the environment based on the action provided.
             % [observation, reward, terminated, truncated, info] = step(action)
             % Args:
             %   action: scalar {1, 2}, 1-stand, 2-hit
