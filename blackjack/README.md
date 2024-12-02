@@ -12,4 +12,4 @@ The custom blackjack environmet is based on the Gymnasium [blackjack.py](https:/
 
 1. Download (or clone) the repository locally.  All the examples require the [BlackJackEnv.m](BlackJackEnv.m) be in the MATLAB's `Current Folder` or added to the path to generate the blackjack game environment.
 2. Start with the [blackjack_intro.mlx](blackjack_intro.mlx) live script which provides a tour of the blackjack interface and illustrates playing a game manually.
-3. The [blackjack_qulearning.mlx](blackjack_qulearning.mlx) live script parallels the  [Solving Blackjack with Q-Learning](https://gymnasium.farama.org/tutorials/training_agents/blackjack_tutorial/) as a demonstration of implementing Q-Learning.
+3. The [blackjack_qulearning.mlx](blackjack_qulearning.mlx) live script parallels the  [Solving Blackjack with Q-Learning](https://gymnasium.farama.org/tutorials/training_agents/blackjack_tutorial/) as a demonstration of implementing Q-Learning.  (Because live scripts are unfortunately still stored as binary files, a pdf export of the qlearning example is included for viewing without MATLAB: [blackjack_qulearning.pdf](blackjack_qulearning.pdf).)
