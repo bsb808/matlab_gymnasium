@@ -186,7 +186,7 @@ classdef BlackJackEnv < handle
             
             % Additional info
             if terminated
-                info = struct('episode_step', obj.step_count, 'dealer_hand', obj.score(obj.dealer));
+                info = struct('episode_step', obj.step_count, 'dealer_hand', obj.dealer);
             else
                 info = struct('episode_step', obj.step_count);
             end
