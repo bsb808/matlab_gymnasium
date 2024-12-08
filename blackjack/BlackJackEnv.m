@@ -15,14 +15,20 @@ classdef BlackJackEnv < handle
     end
     
     methods
-        function obj = BlackJackEnv(natural)
+        function obj = BlackJackEnv(natural, seed)
             % Constructor: Initialize environment parameters
             if nargin < 1
                 obj.natural = false;
             else
                 obj.natural = natural;
             end
-            
+            % Optional user-specified seed
+            if nargin < 2
+                rng("shuffle");
+            else
+                rng(seed);
+            end
+
             obj.action_size = 1;
             obj.max_steps = 10;  % Maximum steps per episode
             obj.step_count = 0;
