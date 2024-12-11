@@ -114,6 +114,21 @@ classdef BlackJackEnv < handle
             % Create info struct with additional information
             info = struct('episode_step', obj.step_count);
         end
+
+        function [observation, info] = setall(obj, playerscards, dealerscards)
+            % SETALL Set the environment to a specific state for all cards.
+            % [observation, info] = SETALL(playerscards, dealerscards)
+            %
+            % Args:
+            % playerscards: Array/vector of the two player's cards.
+            % dealerscards: Array/vector of the two dealer's cards.
+            %
+            obj.step_count = 0;
+            obj.player = playerscards;
+            obj.dealer = dealerscards;
+            observation = obj.get_obs();
+            info = struct('episode_step', obj.step_count);
+        end
         
         function [observation, info] = set(obj, observation)
             % SET Set the environment to a specific state
@@ -124,7 +139,7 @@ classdef BlackJackEnv < handle
             % Returns:
             %   observation: State after setting - should be same as input
             %   info: Additional information dictionary
-            obj.step_count = 1;
+            obj.step_count = 0;
             obj.dealer = [observation(2), obj.draw_card()];
             if observation(3)
                 obj.player = [1, observation(1) - 11];
