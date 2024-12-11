@@ -13,3 +13,11 @@ for ii = 4:21
         end
     end
 end
+%% 
+
+% Test the setall
+env = BlackJackEnv(1);
+observation = env.reset();
+playerscards = [1 5];
+dealerscards = [10 1];
+[new_observation, info] = env.setall(playerscards, dealerscards)
