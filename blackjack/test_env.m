@@ -21,3 +21,14 @@ observation = env.reset();
 playerscards = [1 5];
 dealerscards = [10 1];
 [new_observation, info] = env.setall(playerscards, dealerscards)
+
+% Test all permutations
+for ii = 1:10
+    for jj = 1:10
+        for kk = 1:10
+            for ll = 1:10
+                [new_observation, info] = env.setall([ii,jj], [kk, ll]);
+            end
+        end
+    end
+end
